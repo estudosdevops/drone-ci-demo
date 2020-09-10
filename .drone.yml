@@ -14,9 +14,9 @@ steps:
       cache_from:
         - estudosdevops/${DRONE_REPO_NAME}:${DRONE_SOURCE_BRANCH/\//-}
       username:
-        from_secret: registry_username
+        from_secret: docker_username
       password:
-        from_secret: registry_password
+        from_secret: docker_password
     when:
       event:
         exclude:
@@ -53,9 +53,9 @@ steps:
       REPO: estudosdevops/${DRONE_REPO_NAME}
       MASTER_TAG: master-${DRONE_COMMIT_SHA:0:5}
       DOCKER_USER:
-        from_secret: registry_username
+        from_secret: docker_username
       DOCKER_PASS:
-        from_secret: registry_password
+        from_secret: docker_password
     when:
       event:
         - tag
@@ -68,10 +68,10 @@ steps:
         - ${DRONE_TAG/\//-}
       cache_from:
         - estudosdevops/${DRONE_REPO_NAME}:master-${DRONE_COMMIT_SHA:0:5}
-      username: estudosdevops
-        # from_secret: registry_username
-      password: estudosdevops@123
-        # from_secret: registry_username
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_username
     when:
       event:
         - tag
